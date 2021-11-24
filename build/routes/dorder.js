@@ -16,6 +16,8 @@ class DetailorderRoutes {
         this.router.put('/:id', dorder_1.default.update);
         this.router.delete('/:id', dorder_1.default.delete);
         this.router.get('/:id', dorder_1.default.get);
+        this.router.get('/status/:count', dorder_1.default.countOrders);
+        this.router.get('/order/:count', dorder_1.default.Orders);
     }
 }
 const detailorderRoutes = new DetailorderRoutes();

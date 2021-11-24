@@ -10,6 +10,18 @@ class DetailorderController {
        res.json(detailOrder);
     } 
 
+    public async countOrders (req: Request, res: Response): Promise<void>{
+        const { count } = req.params;
+        const detailOrder = await pool.query('SELECT COUNT(STATUS) AS status from detail_Order WHERE status = ?', [count]);
+        res.json(detailOrder);
+     } 
+
+     public async Orders (req: Request, res: Response): Promise<void>{
+        const { count } = req.params;
+        const detailOrder = await pool.query('SELECT * from detail_Order WHERE status like ?', [count]);
+        res.json(detailOrder);
+     } 
+
     public async create (req: Request, res: Response): Promise<void> {
         await pool.query('INSERT INTO detail_Order set ?', [req.body]);
         res.json({message: 'saved data'});

@@ -16,6 +16,7 @@ class FDRoutes {
         this.router.put('/:id', FD_1.default.update);
         this.router.delete('/:id', FD_1.default.delete);
         this.router.get('/:id', FD_1.default.get);
+        this.router.get('/tfood/:tfood', FD_1.default.Tfood);
     }
 }
 const fdRoutes = new FDRoutes();

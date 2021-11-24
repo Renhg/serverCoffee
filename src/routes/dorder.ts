@@ -18,6 +18,8 @@ class DetailorderRoutes {
         this.router.put('/:id', detailorderController.update);
         this.router.delete('/:id', detailorderController.delete);
         this.router.get('/:id', detailorderController.get);
+        this.router.get('/status/:count', detailorderController.countOrders);
+        this.router.get('/order/:count', detailorderController.Orders);
     } 
 }
 

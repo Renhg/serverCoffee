@@ -20,6 +20,20 @@ class DetailorderController {
             res.json(detailOrder);
         });
     }
+    countOrders(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { count } = req.params;
+            const detailOrder = yield database_1.default.query('SELECT COUNT(STATUS) AS status from detail_Order WHERE status = ?', [count]);
+            res.json(detailOrder);
+        });
+    }
+    Orders(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { count } = req.params;
+            const detailOrder = yield database_1.default.query('SELECT * from detail_Order WHERE status like ?', [count]);
+            res.json(detailOrder);
+        });
+    }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             yield database_1.default.query('INSERT INTO detail_Order set ?', [req.body]);

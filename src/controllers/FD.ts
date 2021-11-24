@@ -10,6 +10,12 @@ class FDController {
        res.json(FD);
     } 
 
+    public async Tfood (req: Request, res: Response): Promise<void>{
+        const { tfood } = req.params;
+        const FD = await db.query('SELECT * FROM FD WHERE typ_id LIKE ?', [tfood]);
+        res.json(FD);
+     } 
+
     public async create (req: Request, res: Response): Promise<void> {
         await db.query('INSERT INTO FD set ?', [req.body]);
         res.json({message: 'saved data'});

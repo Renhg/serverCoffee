@@ -18,6 +18,7 @@ class FDRoutes {
         this.router.put('/:id', fdController.update);
         this.router.delete('/:id', fdController.delete);
         this.router.get('/:id', fdController.get);
+        this.router.get('/tfood/:tfood', fdController.Tfood);
     } 
 }
 

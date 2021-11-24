@@ -20,6 +20,13 @@ class FDController {
             res.json(FD);
         });
     }
+    Tfood(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { tfood } = req.params;
+            const FD = yield database_1.default.query('SELECT * FROM FD WHERE typ_id LIKE ?', [tfood]);
+            res.json(FD);
+        });
+    }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             yield database_1.default.query('INSERT INTO FD set ?', [req.body]);
