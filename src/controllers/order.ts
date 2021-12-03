@@ -6,13 +6,17 @@ class OrderController {
 
 
     public async list (req: Request, res: Response){
-       const FD = await db.query('SELECT * FROM order_customer');
-       res.json(FD);
+       const order = await db.query('SELECT * FROM order_customer');
+       res.json(order);
     } 
 
+    public async getlast (req: Request, res: Response){
+        const order = await db.query('SELECT max(id) as id FROM order_customer');
+        res.json(order);
+     } 
     public async create (req: Request, res: Response): Promise<void> {
-        await db.query('INSERT INTO order_customer set ?', [req.body]);
-        res.json({message: 'saved data'});
+        const order = await db.query('INSERT INTO order_customer set ?', [req.body]);
+        res.json(order);
     }
 
     public async delete (req: Request, res: Response): Promise<void>{
@@ -36,6 +40,8 @@ class OrderController {
         }
         res.status(404).json({text: 'order does not exist: ' + req.params.id});
     }
+
+    
 }
 
 const orderController= new OrderController();

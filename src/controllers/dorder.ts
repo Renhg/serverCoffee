@@ -16,6 +16,13 @@ class DetailorderController {
         res.json(detailOrder);
      } 
 
+     public async getlistFood(req: Request, res: Response): Promise<void>{
+        const { count } = req.params;
+        const detailOrder = await pool.query('SELECT COUNT(*) AS amount, FD.name, FD.price FROM FD INNER JOIN detail_Order ON FD.id = detail_Order.fdid WHERE order_id = ? GROUP BY FD.id ORDER BY FD.id', [count]);
+        res.json(detailOrder);
+     } 
+
+
      public async Orders (req: Request, res: Response): Promise<void>{
         const { count } = req.params;
         const detailOrder = await pool.query('SELECT * from detail_Order WHERE status like ?', [count]);
@@ -23,8 +30,8 @@ class DetailorderController {
      } 
 
     public async create (req: Request, res: Response): Promise<void> {
-        await pool.query('INSERT INTO detail_Order set ?', [req.body]);
-        res.json({message: 'saved data'});
+        const detailOrder = await pool.query('INSERT INTO detail_Order set ?', [req.body]);
+        res.json(detailOrder);
     }
 
     public async delete (req: Request, res: Response): Promise<void>{

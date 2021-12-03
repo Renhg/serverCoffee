@@ -16,14 +16,20 @@ const database_1 = __importDefault(require("../database"));
 class OrderController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const FD = yield database_1.default.query('SELECT * FROM order_customer');
-            res.json(FD);
+            const order = yield database_1.default.query('SELECT * FROM order_customer');
+            res.json(order);
+        });
+    }
+    getlast(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const order = yield database_1.default.query('SELECT max(id) as id FROM order_customer');
+            res.json(order);
         });
     }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield database_1.default.query('INSERT INTO order_customer set ?', [req.body]);
-            res.json({ message: 'saved data' });
+            const order = yield database_1.default.query('INSERT INTO order_customer set ?', [req.body]);
+            res.json(order);
         });
     }
     delete(req, res) {

@@ -16,6 +16,7 @@ class OrderRoutes {
         this.router.delete('/:id', order_1.default.delete);
         this.router.put('/:id', order_1.default.update);
         this.router.get('/:id', order_1.default.get);
+        this.router.get('/last/id', order_1.default.getlast);
     }
 }
 const orderRoutes = new OrderRoutes();

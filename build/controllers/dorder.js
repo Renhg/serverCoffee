@@ -27,6 +27,13 @@ class DetailorderController {
             res.json(detailOrder);
         });
     }
+    getlistFood(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { count } = req.params;
+            const detailOrder = yield database_1.default.query('SELECT COUNT(*) AS amount, FD.name, FD.price FROM FD INNER JOIN detail_Order ON FD.id = detail_Order.fdid WHERE order_id = ? GROUP BY FD.id ORDER BY FD.id', [count]);
+            res.json(detailOrder);
+        });
+    }
     Orders(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { count } = req.params;
@@ -36,8 +43,8 @@ class DetailorderController {
     }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield database_1.default.query('INSERT INTO detail_Order set ?', [req.body]);
-            res.json({ message: 'saved data' });
+            const detailOrder = yield database_1.default.query('INSERT INTO detail_Order set ?', [req.body]);
+            res.json(detailOrder);
         });
     }
     delete(req, res) {

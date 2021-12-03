@@ -18,6 +18,7 @@ class DetailorderRoutes {
         this.router.get('/:id', dorder_1.default.get);
         this.router.get('/status/:count', dorder_1.default.countOrders);
         this.router.get('/order/:count', dorder_1.default.Orders);
+        this.router.get('/order/customer/:count', dorder_1.default.getlistFood);
     }
 }
 const detailorderRoutes = new DetailorderRoutes();
