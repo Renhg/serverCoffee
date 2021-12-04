@@ -29,8 +29,21 @@ class DetailorderController {
     }
     getlistFood(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            const { fdid } = req.params;
+            const { orderid } = req.params;
+            const detailOrder = yield database_1.default.query('SELECT * FROM detail_Order where fdid = ? and order_id = ?', [fdid, orderid]);
+            console.log(detailOrder);
+            if (detailOrder.length > 0) {
+                return res.json(detailOrder[0]);
+            }
+            return res.json([detailOrder[0]]);
+        });
+    }
+    countOrderCustomer(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { cust } = req.params;
             const { count } = req.params;
-            const detailOrder = yield database_1.default.query('SELECT COUNT(*) AS amount, FD.name, FD.price FROM FD INNER JOIN detail_Order ON FD.id = detail_Order.fdid WHERE order_id = ? GROUP BY FD.id ORDER BY FD.id', [count]);
+            const detailOrder = yield database_1.default.query('SELECT COUNT(*) AS count from detail_Order INNER JOIN order_customer on detail_Order.order_id = ? WHERE detail_Order.fdid = ?', [cust, count]);
             res.json(detailOrder);
         });
     }
