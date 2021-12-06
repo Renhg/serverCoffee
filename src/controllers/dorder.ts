@@ -10,6 +10,8 @@ class DetailorderController {
        res.json(detailOrder);
     } 
 
+ 
+
     public async countOrders (req: Request, res: Response): Promise<void>{
         const { count } = req.params;
         const detailOrder = await pool.query('SELECT COUNT(STATUS) AS status from detail_Order WHERE status = ?', [count]);
@@ -26,14 +28,12 @@ class DetailorderController {
             return res.json(detailOrder[0]);
         }
         return res.json([detailOrder[0]]);
-    
     }
 
 
-     public async countOrderCustomer (req: Request, res: Response): Promise<void>{
+     public async listOrderCustomer (req: Request, res: Response): Promise<void>{
         const{ cust } = req.params;
-        const { count } = req.params;
-        const detailOrder = await pool.query('SELECT COUNT(*) AS count from detail_Order INNER JOIN order_customer on detail_Order.order_id = ? WHERE detail_Order.fdid = ?', [cust, count]);
+        const detailOrder = await pool.query('SELECT detail_Order.amount, FD.name, detail_Order.collect from detail_Order INNER JOIN FD on detail_Order.fdid = FD.id  WHERE detail_Order.order_id = ?', [cust]);
         res.json(detailOrder);
      } 
 

@@ -39,11 +39,10 @@ class DetailorderController {
             return res.json([detailOrder[0]]);
         });
     }
-    countOrderCustomer(req, res) {
+    listOrderCustomer(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { cust } = req.params;
-            const { count } = req.params;
-            const detailOrder = yield database_1.default.query('SELECT COUNT(*) AS count from detail_Order INNER JOIN order_customer on detail_Order.order_id = ? WHERE detail_Order.fdid = ?', [cust, count]);
+            const detailOrder = yield database_1.default.query('SELECT detail_Order.amount, FD.name, detail_Order.collect from detail_Order INNER JOIN FD on detail_Order.fdid = FD.id  WHERE detail_Order.order_id = ?', [cust]);
             res.json(detailOrder);
         });
     }
