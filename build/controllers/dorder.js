@@ -23,7 +23,7 @@ class DetailorderController {
     countOrders(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { count } = req.params;
-            const detailOrder = yield database_1.default.query('SELECT COUNT(STATUS) AS status from detail_Order WHERE status = ?', [count]);
+            const detailOrder = yield database_1.default.query('SELECT COUNT(STATUS) AS status from detail_Order INNER JOIN order_customer on detail_Order.order_id = order_customer.id WHERE detail_Order.status = ? AND order_customer.confirmed = true ', [count]);
             res.json(detailOrder);
         });
     }

@@ -14,7 +14,7 @@ class DetailorderController {
 
     public async countOrders (req: Request, res: Response): Promise<void>{
         const { count } = req.params;
-        const detailOrder = await pool.query('SELECT COUNT(STATUS) AS status from detail_Order WHERE status = ?', [count]);
+        const detailOrder = await pool.query('SELECT COUNT(STATUS) AS status from detail_Order INNER JOIN order_customer on detail_Order.order_id = order_customer.id WHERE detail_Order.status = ? AND order_customer.confirmed = true ', [count]);
         res.json(detailOrder);
 
      } 
