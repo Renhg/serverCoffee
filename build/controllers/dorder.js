@@ -42,8 +42,24 @@ class DetailorderController {
     listOrderCustomer(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { cust } = req.params;
-            const detailOrder = yield database_1.default.query('SELECT detail_Order.amount, FD.name, detail_Order.collect from detail_Order INNER JOIN FD on detail_Order.fdid = FD.id  WHERE detail_Order.order_id = ?', [cust]);
+            const detailOrder = yield database_1.default.query('SELECT detail_Order.id, detail_Order.amount, order_customer.name_order, order_customer.NIT, detail_Order.idmesa, FD.name, detail_Order.collect from detail_Order INNER JOIN FD on detail_Order.fdid = FD.id INNER JOIN order_customer on detail_Order.order_id = order_customer.id WHERE detail_Order.order_id = ?', [cust]);
             res.json(detailOrder);
+        });
+    }
+    customerAwait(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const detailOrder = yield database_1.default.query('SELECT detail_Order.order_id FROM detail_Order INNER JOIN order_customer on detail_Order.order_id=order_customer.id WHERE detail_Order.status = FALSE AND order_customer.confirmed = TRUE GROUP BY detail_Order.order_id');
+            res.json(detailOrder);
+        });
+    }
+    totalPay(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { cust } = req.params;
+            const detailOrder = yield database_1.default.query('SELECT SUM(detail_Order.collect) AS total FROM detail_Order WHERE detail_Order.order_id = ?', [cust]);
+            if (detailOrder.length > 0) {
+                return res.json(detailOrder[0]);
+            }
+            return res.json(detailOrder[0]);
         });
     }
     Orders(req, res) {
@@ -70,6 +86,13 @@ class DetailorderController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             yield database_1.default.query('UPDATE detail_Order set ? WHERE id = ?', [req.body, id]);
+            res.json({ message: 'The was updated date id:' });
+        });
+    }
+    updatestatus(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            yield database_1.default.query('UPDATE detail_Order set ? WHERE detail_Order.order_id = ?', [req.body, id]);
             res.json({ message: 'The was updated date id:' });
         });
     }

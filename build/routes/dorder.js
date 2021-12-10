@@ -20,6 +20,9 @@ class DetailorderRoutes {
         this.router.get('/order/:count', dorder_1.default.Orders);
         this.router.get('/order/customer/:fdid/:orderid', dorder_1.default.getlistFood);
         this.router.get('/order/customer/list/pay/:cust', dorder_1.default.listOrderCustomer);
+        this.router.get('/list/await/', dorder_1.default.customerAwait);
+        this.router.put('/order/done/:id', dorder_1.default.updatestatus);
+        this.router.get('/pay/total/:cust', dorder_1.default.totalPay);
     }
 }
 const detailorderRoutes = new DetailorderRoutes();

@@ -22,6 +22,9 @@ class DetailorderRoutes {
         this.router.get('/order/:count', detailorderController.Orders);
         this.router.get('/order/customer/:fdid/:orderid', detailorderController.getlistFood);
         this.router.get('/order/customer/list/pay/:cust', detailorderController.listOrderCustomer);
+        this.router.get('/list/await/', detailorderController.customerAwait);
+        this.router.put('/order/done/:id', detailorderController.updatestatus);
+        this.router.get('/pay/total/:cust', detailorderController.totalPay);
     } 
 }
 

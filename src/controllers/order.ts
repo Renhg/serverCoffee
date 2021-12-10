@@ -9,11 +9,7 @@ class OrderController {
        const order = await db.query('SELECT * FROM order_customer');
        res.json(order);
     } 
-
-    public async getlast (req: Request, res: Response){
-        const order = await db.query('SELECT max(id) as id FROM order_customer');
-        res.json(order);
-     } 
+    
     public async create (req: Request, res: Response): Promise<void> {
         const order = await db.query('INSERT INTO order_customer set ?', [req.body]);
         res.json(order);

@@ -10,13 +10,10 @@ class DetailorderController {
        res.json(detailOrder);
     } 
 
- 
-
     public async countOrders (req: Request, res: Response): Promise<void>{
         const { count } = req.params;
         const detailOrder = await pool.query('SELECT COUNT(STATUS) AS status from detail_Order INNER JOIN order_customer on detail_Order.order_id = order_customer.id WHERE detail_Order.status = ? AND order_customer.confirmed = true ', [count]);
         res.json(detailOrder);
-
      } 
 
      public async getlistFood (req: Request, res: Response): Promise<any>{
@@ -30,13 +27,25 @@ class DetailorderController {
         return res.json([detailOrder[0]]);
     }
 
-
      public async listOrderCustomer (req: Request, res: Response): Promise<void>{
         const{ cust } = req.params;
-        const detailOrder = await pool.query('SELECT detail_Order.amount, FD.name, detail_Order.collect from detail_Order INNER JOIN FD on detail_Order.fdid = FD.id  WHERE detail_Order.order_id = ?', [cust]);
+        const detailOrder = await pool.query('SELECT detail_Order.id, detail_Order.amount, order_customer.name_order, order_customer.NIT, detail_Order.idmesa, FD.name, detail_Order.collect from detail_Order INNER JOIN FD on detail_Order.fdid = FD.id INNER JOIN order_customer on detail_Order.order_id = order_customer.id WHERE detail_Order.order_id = ?', [cust]);
+        res.json(detailOrder);
+     } 
+     
+     public async customerAwait (req: Request, res: Response){
+        const detailOrder = await pool.query('SELECT detail_Order.order_id FROM detail_Order INNER JOIN order_customer on detail_Order.order_id=order_customer.id WHERE detail_Order.status = FALSE AND order_customer.confirmed = TRUE GROUP BY detail_Order.order_id');
         res.json(detailOrder);
      } 
 
+     public async totalPay (req: Request, res: Response): Promise<any>{
+         const{ cust } = req.params;
+         const detailOrder = await pool.query('SELECT SUM(detail_Order.collect) AS total FROM detail_Order WHERE detail_Order.order_id = ?', [cust]);
+         if (detailOrder.length > 0) {
+            return res.json(detailOrder[0]);
+        }
+        return res.json(detailOrder[0]);
+     }
 
      public async Orders (req: Request, res: Response): Promise<void>{
         const { count } = req.params;
@@ -60,6 +69,13 @@ class DetailorderController {
         await pool.query('UPDATE detail_Order set ? WHERE id = ?', [req.body, id]);
         res.json({message:'The was updated date id:'});
     }
+
+    public async updatestatus (req: Request, res: Response): Promise<void>{
+        const { id } = req.params;
+        await pool.query('UPDATE detail_Order set ? WHERE detail_Order.order_id = ?', [req.body, id]);
+        res.json({message:'The was updated date id:'});
+    }
+
 
     public async get (req: Request, res: Response): Promise<any>{
         const { id } = req.params;

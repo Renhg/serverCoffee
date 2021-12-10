@@ -18,7 +18,6 @@ class OrderRoutes{
         this.router.delete('/:id', orderController.delete);
         this.router.put('/:id', orderController.update);
         this.router.get('/:id' ,  orderController.get);
-        this.router.get('/last/id' ,  orderController.getlast);
     }
 
 }
