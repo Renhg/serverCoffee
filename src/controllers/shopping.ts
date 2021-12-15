@@ -10,6 +10,13 @@ class ShoppingController {
        res.json(s);
     } 
 
+    public async listDate (req: Request, res: Response): Promise<void>{ 
+        const {first} = req.params;
+        const {last} = req.params;
+        const s = await db.query('SELECT * FROM shopping  WHERE created_at BETWEEN ? AND ?', [first, last]);
+        res.json(s);
+     } 
+
     public async create (req: Request, res: Response): Promise<void> {
         await db.query('INSERT INTO shopping set ?', [req.body]);
         res.json({message: 'saved data'});

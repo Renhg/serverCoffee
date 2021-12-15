@@ -20,6 +20,14 @@ class ShoppingController {
             res.json(s);
         });
     }
+    listDate(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { first } = req.params;
+            const { last } = req.params;
+            const s = yield database_1.default.query('SELECT * FROM shopping  WHERE created_at BETWEEN ? AND ?', [first, last]);
+            res.json(s);
+        });
+    }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             yield database_1.default.query('INSERT INTO shopping set ?', [req.body]);

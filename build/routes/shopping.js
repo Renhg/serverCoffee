@@ -16,6 +16,7 @@ class FDRoutes {
         this.router.put('/:id', shopping_1.default.update);
         this.router.delete('/:id', shopping_1.default.delete);
         this.router.get('/:id', shopping_1.default.get);
+        this.router.get('/all/date/:first/:last', shopping_1.default.listDate);
     }
 }
 const shoppingRoutes = new FDRoutes();
