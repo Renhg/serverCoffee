@@ -6,14 +6,14 @@ class ShoppingController {
 
 
     public async list (req: Request, res: Response){
-       const s = await db.query('SELECT * FROM shopping');
+       const s = await db.query('SELECT shopping.id, shopping.name, shopping.cost, shopping.stock, shopping.note, TEXPENSES.NAME as tname, shopping.created_at FROM shopping INNER JOIN TEXPENSES ON shopping.texp=TEXPENSES.ID');
        res.json(s);
     } 
 
     public async listDate (req: Request, res: Response): Promise<void>{ 
         const {first} = req.params;
         const {last} = req.params;
-        const s = await db.query('SELECT * FROM shopping  WHERE created_at BETWEEN ? AND ?', [first, last]);
+        const s = await db.query('SELECT shopping.id, shopping.name, shopping.cost, shopping.stock, shopping.note, TEXPENSES.NAME as tname, shopping.created_at FROM shopping INNER JOIN TEXPENSES ON shopping.texp=TEXPENSES.ID WHERE shopping.created_at BETWEEN ? AND ?', [first, last]);
         res.json(s);
      } 
 

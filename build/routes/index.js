@@ -13,3 +13,4 @@ class IndexRoutes {
 }
 const indexRoutes = new IndexRoutes();
 exports.default = indexRoutes.router;
+//# sourceMappingURL=index.js.map

@@ -9,6 +9,11 @@ import detailorderRoutes from './routes/dorder'
 import shoppingRoutes from './routes/shopping';
 import ingredientRoutes from './routes/ingredient';
 import mesaRoutes from './routes/mesa';
+import texpensesRoutes from './routes/texpenses';
+import employeeRoutes from './routes/employee';
+import temployeeRoutes from './routes/temployee';
+import scheduleRoutes from './routes/schedule';
+import pemployeeRoutes from './routes/admin';
 
 class Server{
 
@@ -37,7 +42,11 @@ class Server{
         this.app.use('/api/shopping', shoppingRoutes);
         this.app.use('/api/ing', ingredientRoutes); 
         this.app.use('/api/mesa', mesaRoutes);
-
+        this.app.use('/api/texp', texpensesRoutes);
+        this.app.use('/api/employee', employeeRoutes);
+        this.app.use('/api/temployee', temployeeRoutes);
+        this.app.use('/api/shedule', scheduleRoutes);
+        this.app.use('/api/admin', pemployeeRoutes);
     }
 
     start(): void {

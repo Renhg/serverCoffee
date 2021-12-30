@@ -1,8 +1,8 @@
 import { Router } from "express";
 
-import ingredientsController from '../controllers/ingredient';
+import ingredientController from '../controllers/ingredient';
 
-class FDRoutes {
+class IngredientRoutes {
 
     public router: Router = Router();
     
@@ -13,13 +13,13 @@ class FDRoutes {
     }
 
     config(): void {
-        this.router.get('/', ingredientsController.list);
-        this.router.post('/', ingredientsController.create);
-        this.router.put('/:id', ingredientsController.update);
-        this.router.delete('/:id', ingredientsController.delete);
-        this.router.get('/:id', ingredientsController.get);
+        this.router.get('/', ingredientController.list);
+        this.router.post('/', ingredientController.create);
+        this.router.put('/:id', ingredientController.update);
+        this.router.delete('/:id', ingredientController.delete);
+        this.router.get('/:id', ingredientController.get);
     } 
 }
 
-const ingredientRoutes = new FDRoutes();
+const ingredientRoutes = new IngredientRoutes();
 export default ingredientRoutes.router;

@@ -20,3 +20,4 @@ class OrderRoutes {
 }
 const orderRoutes = new OrderRoutes();
 exports.default = orderRoutes.router;
+//# sourceMappingURL=order.js.map

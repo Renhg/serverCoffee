@@ -39,10 +39,18 @@ class DetailorderController {
             return res.json([detailOrder[0]]);
         });
     }
+    listDate(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { first } = req.params;
+            const { last } = req.params;
+            const s = yield database_1.default.query('SELECT detail_Order.id, detail_Order.amount, order_customer.name_order, order_customer.NIT, detail_Order.idmesa, FD.name, detail_Order.collect from detail_Order INNER JOIN FD on detail_Order.fdid = FD.id INNER JOIN order_customer on detail_Order.order_id = order_customer.id WHERE detail_Order.created_at BETWEEN ? AND ?', [first, last]);
+            res.json(s);
+        });
+    }
     listOrderCustomer(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { cust } = req.params;
-            const detailOrder = yield database_1.default.query('SELECT detail_Order.id, detail_Order.amount, order_customer.name_order, order_customer.NIT, detail_Order.idmesa, FD.name, detail_Order.collect from detail_Order INNER JOIN FD on detail_Order.fdid = FD.id INNER JOIN order_customer on detail_Order.order_id = order_customer.id WHERE detail_Order.order_id = ?', [cust]);
+            const detailOrder = yield database_1.default.query('SELECT detail_Order.id, detail_Order.amount, detail_Order.employee, order_customer.name_order, order_customer.NIT, detail_Order.idmesa, FD.name, detail_Order.collect from detail_Order INNER JOIN FD on detail_Order.fdid = FD.id INNER JOIN order_customer on detail_Order.order_id = order_customer.id WHERE detail_Order.order_id = ?', [cust]);
             res.json(detailOrder);
         });
     }
@@ -110,3 +118,4 @@ class DetailorderController {
 }
 const detailorderController = new DetailorderController();
 exports.default = detailorderController;
+//# sourceMappingURL=dorder.js.map

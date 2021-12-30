@@ -23,7 +23,9 @@ class DetailorderRoutes {
         this.router.get('/list/await/', dorder_1.default.customerAwait);
         this.router.put('/order/done/:id', dorder_1.default.updatestatus);
         this.router.get('/pay/total/:cust', dorder_1.default.totalPay);
+        this.router.get('/list/sales/:first/:last', dorder_1.default.listDate);
     }
 }
 const detailorderRoutes = new DetailorderRoutes();
 exports.default = detailorderRoutes.router;
+//# sourceMappingURL=dorder.js.map

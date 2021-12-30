@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import shoppingController from '../controllers/shopping';
 
-class FDRoutes {
+class ShoppingRoutes {
 
     public router: Router = Router();
     
@@ -22,5 +22,5 @@ class FDRoutes {
     } 
 }
 
-const shoppingRoutes = new FDRoutes();
+const shoppingRoutes = new ShoppingRoutes();
 export default shoppingRoutes.router;

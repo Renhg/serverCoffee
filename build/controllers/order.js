@@ -54,3 +54,4 @@ class OrderController {
 }
 const orderController = new OrderController();
 exports.default = orderController;
+//# sourceMappingURL=order.js.map

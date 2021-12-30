@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
-class IngredientsController {
+class IngredientController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const ing = yield database_1.default.query('SELECT * FROM ingredient');
@@ -52,5 +52,6 @@ class IngredientsController {
         });
     }
 }
-const ingredientsController = new IngredientsController();
-exports.default = ingredientsController;
+const ingredientController = new IngredientController();
+exports.default = ingredientController;
+//# sourceMappingURL=ingredient.js.map

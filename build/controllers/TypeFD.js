@@ -55,3 +55,4 @@ class TypeFDController {
 }
 exports.typeFDController = new TypeFDController();
 exports.default = exports.typeFDController;
+//# sourceMappingURL=TypeFD.js.map

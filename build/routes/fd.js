@@ -21,3 +21,4 @@ class FDRoutes {
 }
 const fdRoutes = new FDRoutes();
 exports.default = fdRoutes.router;
+//# sourceMappingURL=fd.js.map

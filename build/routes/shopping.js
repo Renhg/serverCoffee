@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const shopping_1 = __importDefault(require("../controllers/shopping"));
-class FDRoutes {
+class ShoppingRoutes {
     constructor() {
         this.router = (0, express_1.Router)();
         this.config();
@@ -19,5 +19,6 @@ class FDRoutes {
         this.router.get('/all/date/:first/:last', shopping_1.default.listDate);
     }
 }
-const shoppingRoutes = new FDRoutes();
+const shoppingRoutes = new ShoppingRoutes();
 exports.default = shoppingRoutes.router;
+//# sourceMappingURL=shopping.js.map

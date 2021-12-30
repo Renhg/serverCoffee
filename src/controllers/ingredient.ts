@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 
 import db from '../database'
 
-class IngredientsController {
+class IngredientController {
 
 
     public async list (req: Request, res: Response){
@@ -38,5 +38,5 @@ class IngredientsController {
     }
 }
 
-const ingredientsController= new IngredientsController();
-export default ingredientsController;
+const ingredientController= new IngredientController();
+export default ingredientController;

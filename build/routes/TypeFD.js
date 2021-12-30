@@ -20,3 +20,4 @@ class TypeFDRoutes {
 }
 const typeFDRoutes = new TypeFDRoutes();
 exports.default = typeFDRoutes.router;
+//# sourceMappingURL=TypeFD.js.map

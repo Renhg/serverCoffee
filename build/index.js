@@ -14,6 +14,11 @@ const dorder_1 = __importDefault(require("./routes/dorder"));
 const shopping_1 = __importDefault(require("./routes/shopping"));
 const ingredient_1 = __importDefault(require("./routes/ingredient"));
 const mesa_1 = __importDefault(require("./routes/mesa"));
+const texpenses_1 = __importDefault(require("./routes/texpenses"));
+const employee_1 = __importDefault(require("./routes/employee"));
+const temployee_1 = __importDefault(require("./routes/temployee"));
+const schedule_1 = __importDefault(require("./routes/schedule"));
+const admin_1 = __importDefault(require("./routes/admin"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
@@ -36,6 +41,11 @@ class Server {
         this.app.use('/api/shopping', shopping_1.default);
         this.app.use('/api/ing', ingredient_1.default);
         this.app.use('/api/mesa', mesa_1.default);
+        this.app.use('/api/texp', texpenses_1.default);
+        this.app.use('/api/employee', employee_1.default);
+        this.app.use('/api/temployee', temployee_1.default);
+        this.app.use('/api/shedule', schedule_1.default);
+        this.app.use('/api/admin', admin_1.default);
     }
     start() {
         const port = this.app.get('port');
@@ -46,3 +56,4 @@ class Server {
 }
 const server = new Server();
 server.start();
+//# sourceMappingURL=index.js.map
