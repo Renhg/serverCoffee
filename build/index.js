@@ -19,6 +19,8 @@ const employee_1 = __importDefault(require("./routes/employee"));
 const temployee_1 = __importDefault(require("./routes/temployee"));
 const schedule_1 = __importDefault(require("./routes/schedule"));
 const admin_1 = __importDefault(require("./routes/admin"));
+const user_1 = __importDefault(require("./routes/user"));
+const enterprise_1 = __importDefault(require("./routes/enterprise"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
@@ -46,6 +48,8 @@ class Server {
         this.app.use('/api/temployee', temployee_1.default);
         this.app.use('/api/shedule', schedule_1.default);
         this.app.use('/api/admin', admin_1.default);
+        this.app.use('/api/user', user_1.default);
+        this.app.use('/api/enterprise', enterprise_1.default);
     }
     start() {
         const port = this.app.get('port');

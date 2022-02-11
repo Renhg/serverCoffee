@@ -18,6 +18,7 @@ class EmployeeRoutes {
         this.router.get('/:id', employee_1.default.get);
         this.router.get('/type/:temployee', employee_1.default.Temployee);
         this.router.get('/email/:email', employee_1.default.emailEmploye);
+        this.router.get('/user/data/:id', employee_1.default.getUser);
     }
 }
 const employeeRoutes = new EmployeeRoutes();

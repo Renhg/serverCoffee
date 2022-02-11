@@ -10,10 +10,13 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC", 
+  "license": "ISC",
   "dependencies": {
+    "@angular/fire": "^7.2.0",
+    "@firebase/auth": "^0.19.4",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "firebase": "^9.6.1",
     "morgan": "^1.10.0",
     "promise-mysql": "^3.3.1"
   },

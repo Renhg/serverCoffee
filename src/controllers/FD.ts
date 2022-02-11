@@ -5,14 +5,14 @@ import db from '../database'
 class FDController {
 
 
-    public async list (req: Request, res: Response){
+    public async list (req: Request, res: Response): Promise<void>{
        const FD = await db.query('SELECT * FROM FD');
        res.json(FD);
     } 
 
     public async Tfood (req: Request, res: Response): Promise<void>{
         const { tfood } = req.params;
-        const FD = await db.query('SELECT * FROM FD WHERE typ_id LIKE ?', [tfood]);
+        const FD = await db.query('SELECT * FROM FD WHERE typ_id LIKE ? ', [tfood]);
         res.json(FD);
      } 
 

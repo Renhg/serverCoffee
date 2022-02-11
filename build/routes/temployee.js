@@ -11,7 +11,7 @@ class TEmployeeRoutes {
         this.config();
     }
     config() {
-        this.router.get('/', temployee_1.default.list);
+        this.router.get('/list/:enterprise', temployee_1.default.list);
         this.router.post('/', temployee_1.default.create);
         this.router.put('/:id', temployee_1.default.update);
         this.router.delete('/:id', temployee_1.default.delete);

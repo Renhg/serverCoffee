@@ -23,14 +23,14 @@ class EmployeeController {
     Temployee(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { temployee } = req.params;
-            const FD = yield database_1.default.query('SELECT * FROM EMPLOYEE WHERE TYPE LIKE ?', [temployee]);
+            const FD = yield database_1.default.query('SELECT *, EMPLOYEE.ID AS EMPLOYEEID FROM EMPLOYEE INNER JOIN USER ON EMPLOYEE.USER = USER.ID WHERE EMPLOYEE.TYPE LIKE ?', [temployee]);
             res.json(FD);
         });
     }
     emailEmploye(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { email } = req.params;
-            const r = yield database_1.default.query('SELECT * FROM EMPLOYEE WHERE EMAIL LIKE ?', [email]);
+            const r = yield database_1.default.query('SELECT * FROM EMPLOYEE WHERE USER LIKE ?', [email]);
             if (r.length > 0) {
                 return res.json(r[0]);
             }
@@ -39,14 +39,14 @@ class EmployeeController {
     }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield database_1.default.query('INSERT INTO EMPLOYEE set ?', [req.body]);
-            res.json({ message: 'saved data' });
+            const add = yield database_1.default.query('INSERT INTO EMPLOYEE set ?', [req.body]);
+            res.json(add);
         });
     }
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            yield database_1.default.query('DELETE FROM EMPLOYEE WHERE id = ?', [id]);
+            yield database_1.default.query('DELETE FROM EMPLOYEE WHERE ID = ?', [id]);
             res.json({ text: 'deleted data' + req.params.id });
         });
     }
@@ -61,6 +61,17 @@ class EmployeeController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             const ing = yield database_1.default.query('SELECT * FROM EMPLOYEE WHERE id = ?', [id]);
+            console.log(ing);
+            if (ing.length > 0) {
+                return res.json(ing[0]);
+            }
+            res.status(404).json({ text: 'EMPLOYEE does not exist: ' + req.params.id });
+        });
+    }
+    getUser(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const ing = yield database_1.default.query('SELECT * FROM EMPLOYEE WHERE USER = ?', [id]);
             console.log(ing);
             if (ing.length > 0) {
                 return res.json(ing[0]);

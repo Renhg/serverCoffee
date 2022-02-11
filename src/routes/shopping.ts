@@ -18,7 +18,7 @@ class ShoppingRoutes {
         this.router.put('/:id', shoppingController.update);
         this.router.delete('/:id', shoppingController.delete);
         this.router.get('/:id', shoppingController.get);
-        this.router.get('/all/date/:first/:last', shoppingController.listDate);
+        this.router.get('/all/date/:first/:last/:enterprise', shoppingController.listDate);
     } 
 }
 

@@ -24,7 +24,8 @@ class ShoppingController {
         return __awaiter(this, void 0, void 0, function* () {
             const { first } = req.params;
             const { last } = req.params;
-            const s = yield database_1.default.query('SELECT shopping.id, shopping.name, shopping.cost, shopping.stock, shopping.note, TEXPENSES.NAME as tname, shopping.created_at FROM shopping INNER JOIN TEXPENSES ON shopping.texp=TEXPENSES.ID WHERE shopping.created_at BETWEEN ? AND ?', [first, last]);
+            const { enterprise } = req.params;
+            const s = yield database_1.default.query('SELECT shopping.id, shopping.name, shopping.cost, shopping.stock, shopping.note, TEXPENSES.NAME as tname, shopping.created_at FROM shopping INNER JOIN TEXPENSES ON shopping.texp=TEXPENSES.ID WHERE shopping.created_at BETWEEN ? AND ? AND shopping.ENTERPRISE = ?', [first, last, enterprise]);
             res.json(s);
         });
     }

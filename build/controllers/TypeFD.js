@@ -17,7 +17,8 @@ const database_1 = __importDefault(require("../database"));
 class TypeFDController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const tFD = yield database_1.default.query('SELECT * FROM type_FD');
+            const { enterprise } = req.params;
+            const tFD = yield database_1.default.query('SELECT * FROM type_FD INNER JOIN EMPLOYEE ON type_FD.CREATED_BY = EMPLOYEE.ID WHERE EMPLOYEE.ENTERPRISE = ?', [enterprise]);
             res.json(tFD);
         });
     }

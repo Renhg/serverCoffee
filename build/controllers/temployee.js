@@ -17,7 +17,8 @@ const database_1 = __importDefault(require("../database"));
 class TemployeeController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const tFD = yield database_1.default.query('SELECT * FROM  TEMPLOYEE ');
+            const { enterprise } = req.params;
+            const tFD = yield database_1.default.query('SELECT *, TEMPLOYEE.ID AS TEMPLOYEEID FROM  TEMPLOYEE INNER JOIN EMPLOYEE ON TEMPLOYEE.CREATED_BY = EMPLOYEE.ID WHERE EMPLOYEE.ENTERPRISE = ?', [enterprise]);
             res.json(tFD);
         });
     }
@@ -29,8 +30,8 @@ class TemployeeController {
     }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield database_1.default.query('INSERT INTO TEMPLOYEE set ?', [req.body]);
-            res.json({ message: 'saved data ' });
+            const add = yield database_1.default.query('INSERT INTO TEMPLOYEE set ?', [req.body]);
+            res.json(add);
         });
     }
     delete(req, res) {

@@ -11,7 +11,7 @@ class TypeFDRoutes {
         this.config();
     }
     config() {
-        this.router.get('/', TypeFD_1.default.list);
+        this.router.get('/list/:enterprise', TypeFD_1.default.list);
         this.router.post('/', TypeFD_1.default.create);
         this.router.delete('/:id', TypeFD_1.default.delete);
         this.router.put('/:id', TypeFD_1.default.update);

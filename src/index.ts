@@ -14,6 +14,8 @@ import employeeRoutes from './routes/employee';
 import temployeeRoutes from './routes/temployee';
 import scheduleRoutes from './routes/schedule';
 import pemployeeRoutes from './routes/admin';
+import userRoutes from './routes/user'
+import enterpriseRoutes from './routes/enterprise'
 
 class Server{
 
@@ -47,6 +49,8 @@ class Server{
         this.app.use('/api/temployee', temployeeRoutes);
         this.app.use('/api/shedule', scheduleRoutes);
         this.app.use('/api/admin', pemployeeRoutes);
+        this.app.use('/api/user', userRoutes);
+        this.app.use('/api/enterprise', enterpriseRoutes)
     }
 
     start(): void {

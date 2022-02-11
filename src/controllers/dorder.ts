@@ -16,9 +16,9 @@ class DetailorderController {
      } 
 
      public async getlistFood (req: Request, res: Response): Promise<any>{
-        const { fdid } = req.params;
-        const { orderid } = req.params;
-        const detailOrder = await db.query('SELECT * FROM detail_Order where fdid = ? and order_id = ?', [fdid, orderid]);
+        const { createdby } = req.params;
+        const { item } = req.params;
+        const detailOrder = await db.query('SELECT * FROM detail_Order WHERE order_id = 0 and CREATED_BY = ? and fdid = ?', [createdby, item]);
         console.log(detailOrder);
         if (detailOrder.length > 0) {
             return res.json(detailOrder[0]);
@@ -35,18 +35,27 @@ class DetailorderController {
 
      public async listOrderCustomer (req: Request, res: Response): Promise<void>{
         const{ cust } = req.params;
-        const detailOrder = await db.query('SELECT detail_Order.id, detail_Order.amount, detail_Order.employee, order_customer.name_order, order_customer.NIT, detail_Order.idmesa, FD.name, detail_Order.collect from detail_Order INNER JOIN FD on detail_Order.fdid = FD.id INNER JOIN order_customer on detail_Order.order_id = order_customer.id WHERE detail_Order.order_id = ?', [cust]);
+        const detailOrder = await db.query('SELECT detail_Order.id, detail_Order.amount, detail_Order.CREATED_BY, order_customer.name_order, order_customer.NIT, detail_Order.idmesa, FD.name, detail_Order.collect from detail_Order INNER JOIN FD on detail_Order.fdid = FD.id INNER JOIN order_customer on detail_Order.order_id = order_customer.id WHERE detail_Order.order_id = ?', [cust]);
         res.json(detailOrder);
      } 
+
+     public async listOrder (req: Request, res: Response): Promise<void>{
+        const { createdby } = req.params;
+        const detailOrder = await db.query('SELECT detail_Order.id, detail_Order.amount, detail_Order.CREATED_BY, detail_Order.idmesa, FD.name, detail_Order.collect from detail_Order INNER JOIN FD on detail_Order.fdid = FD.id WHERE detail_Order.order_id = 0 and detail_Order.CREATED_BY = ?', [ createdby]);
+        res.json(detailOrder);
+     }  
      
      public async customerAwait (req: Request, res: Response){
-        const detailOrder = await db.query('SELECT detail_Order.order_id FROM detail_Order INNER JOIN order_customer on detail_Order.order_id=order_customer.id WHERE detail_Order.status = FALSE AND order_customer.confirmed = TRUE GROUP BY detail_Order.order_id');
+        const { createdby } = req.params;
+        //const {enterprise} = req.params;
+        const detailOrder = await db.query('SELECT detail_Order.order_id FROM detail_Order INNER JOIN order_customer on detail_Order.order_id=order_customer.id WHERE detail_Order.status = FALSE AND detail_Order.CREATED_BY = ? GROUP BY detail_Order.order_id', [ createdby]);
         res.json(detailOrder);
      } 
 
      public async totalPay (req: Request, res: Response): Promise<any>{
          const{ cust } = req.params;
-         const detailOrder = await db.query('SELECT SUM(detail_Order.collect) AS total FROM detail_Order WHERE detail_Order.order_id = ?', [cust]);
+         const{ createdby } = req.params;
+         const detailOrder = await db.query('SELECT SUM(detail_Order.collect) AS total FROM detail_Order WHERE order_id = ? AND CREATED_BY = ?', [cust,createdby]);
          if (detailOrder.length > 0) {
             return res.json(detailOrder[0]);
         }
@@ -73,6 +82,13 @@ class DetailorderController {
     public async update (req: Request, res: Response): Promise<void>{
         const { id } = req.params;
         await db.query('UPDATE detail_Order set ? WHERE id = ?', [req.body, id]);
+        res.json({message:'The was updated date id:'});
+    }
+
+    public async updatecustomer(req: Request, res: Response): Promise<void>{
+        
+        const { createdby } = req.params
+        await db.query('UPDATE detail_Order set ? WHERE order_id = 0 and CREATED_BY = ?', [req.body, createdby]);
         res.json({message:'The was updated date id:'});
     }
 

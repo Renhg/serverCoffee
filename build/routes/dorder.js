@@ -14,15 +14,17 @@ class DetailorderRoutes {
         this.router.get('/', dorder_1.default.list);
         this.router.post('/', dorder_1.default.create);
         this.router.put('/:id', dorder_1.default.update);
+        this.router.put('/customer/add/:createdby', dorder_1.default.updatecustomer);
+        this.router.put('/order/done/:id', dorder_1.default.updatestatus);
         this.router.delete('/:id', dorder_1.default.delete);
         this.router.get('/:id', dorder_1.default.get);
         this.router.get('/status/:count', dorder_1.default.countOrders);
         this.router.get('/order/:count', dorder_1.default.Orders);
-        this.router.get('/order/customer/:fdid/:orderid', dorder_1.default.getlistFood);
+        this.router.get('/order/customer/:createdby/:item', dorder_1.default.getlistFood);
         this.router.get('/order/customer/list/pay/:cust', dorder_1.default.listOrderCustomer);
-        this.router.get('/list/await/', dorder_1.default.customerAwait);
-        this.router.put('/order/done/:id', dorder_1.default.updatestatus);
-        this.router.get('/pay/total/:cust', dorder_1.default.totalPay);
+        this.router.get('/order/list/:createdby', dorder_1.default.listOrder);
+        this.router.get('/list/await/:createdby', dorder_1.default.customerAwait);
+        this.router.get('/pay/total/:cust/:createdby', dorder_1.default.totalPay);
         this.router.get('/list/sales/:first/:last', dorder_1.default.listDate);
     }
 }

@@ -13,7 +13,7 @@ class TypeFDRoutes{
     }
 
     config(): void {
-        this.router.get('/', typeFDController.list );
+        this.router.get('/list/:enterprise', typeFDController.list );
         this.router.post('/', typeFDController.create);
         this.router.delete('/:id', typeFDController.delete);
         this.router.put('/:id', typeFDController.update);

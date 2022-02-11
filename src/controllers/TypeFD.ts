@@ -4,10 +4,11 @@ import db from '../database';
 
 class TypeFDController {
     
-    public async list (req: Request, res: Response) {
-        const tFD = await db.query('SELECT * FROM type_FD');
+    public async list (req: Request, res: Response) :Promise<void> {
+        const {enterprise} = req.params;
+        const tFD = await db.query('SELECT * FROM type_FD INNER JOIN EMPLOYEE ON type_FD.CREATED_BY = EMPLOYEE.ID WHERE EMPLOYEE.ENTERPRISE = ?', [enterprise]);
         res.json(tFD);
-    }
+    } 
 
     public async create (req: Request, res: Response): Promise<void> {
         await db.query('INSERT INTO type_FD set ?', [req.body]);
