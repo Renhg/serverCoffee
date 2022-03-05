@@ -4,8 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const promise_mysql_1 = __importDefault(require("promise-mysql"));
-const keylocal_1 = __importDefault(require("./keylocal"));
-const pool = promise_mysql_1.default.createPool(keylocal_1.default.database);
+const keys_1 = __importDefault(require("./keys"));
+//import keys from './keylocal'
+const pool = promise_mysql_1.default.createPool(keys_1.default.database);
 pool.getConnection()
     .then(connection => {
     pool.releaseConnection(connection);
