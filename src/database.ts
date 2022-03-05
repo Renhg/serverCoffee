@@ -1,9 +1,9 @@
 import mysql from 'promise-mysql';
 import keys from './keys';
-import keyslocal from './keylocal'
+//import keys from './keylocal'
 
 
-const pool = mysql.createPool(keyslocal.database);
+const pool = mysql.createPool(keys.database);
 
 pool.getConnection()
     .then(connection => {
