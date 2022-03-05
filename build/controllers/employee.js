@@ -71,7 +71,8 @@ class EmployeeController {
     getUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const ing = yield database_1.default.query('SELECT * FROM EMPLOYEE WHERE USER = ?', [id]);
+            const { enterprise } = req.params;
+            const ing = yield database_1.default.query('SELECT * FROM EMPLOYEE WHERE USER LIKE ? AND ENTERPRISE LIKE ?', [id, enterprise]);
             console.log(ing);
             if (ing.length > 0) {
                 return res.json(ing[0]);

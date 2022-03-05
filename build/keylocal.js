@@ -6,7 +6,7 @@ exports.default = {
         host: 'localhost',
         user: 'root',
         password: 'hiren5',
-        database: 'ng_coffee_db',
+        database: 'WORKPLACE',
         port: 3306
     }
 };
